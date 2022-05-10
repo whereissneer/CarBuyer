@@ -11,27 +11,19 @@
 <body>
     <div class="container">
         <div class="row">
-            <h1 class="text-center mb-5 mt-5">Buy a Car ! </h1>
+            <h1 class="text-center mb-5 mt-5">Sell a Car ! </h1>
         </div>
         <div class="container ml-6">
             <nav class="nav nav-pills flex-column flex-sm-row">
                 <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#">HOME</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">BEST OFFERS</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">CONTACT US</a>
-                <a class="flex-sm-fill text-sm-center nav-link addNew" th:href="@{/api/cars/new}">ADD NEW OFFER !</a>
               </nav>
         </div>
-        <div class="container mt-5">
-            <div class="card" style="width: 18rem;">
-                <img src="https://ireland.apollo.olxcdn.com/v1/files/eyJmbiI6IjluYjZud3QycnZkYjItT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJwIjoiMTAsLTEwIiwiYSI6IjAifV19.OVyHRFABS1ibu_TmoAL90__7adb74XqCXrM1sMVxf7M/image;s=1080x720" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Audi A5 45 TFSI S line quattro </h5>
-                  <p class="card-text">350 550 PLN <br> 4197 PLN/month</p>
-                  <a href="#" class="btn btn-primary">BUY NOW !</a>
-                </div>
-              </div>
-        </div>
-
+        <div class="row">
+            <form th:action="@{/car}" th:object="${car}" method="POST">
+                         <!--TODO : ADDING NEW OFFER FORM-->
+            </form>
     </div>
 </body>
 </html>

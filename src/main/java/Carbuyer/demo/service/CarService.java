@@ -9,4 +9,6 @@ import Carbuyer.demo.entity.Car;
 @Service
 public interface CarService {
 	List<Car> getAllCars();
+	
+	Car saveCar(Car car);
 }
