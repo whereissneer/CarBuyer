@@ -1,6 +1,4 @@
-body {
-    background-color: #e0e0e0;
-}
+
 h1 {
     color : black;
 
@@ -8,4 +6,8 @@ h1 {
 .addNew {
     font-size: 20px;
     background-color: white;
+} 
+.borderless {
+    border:0.5px solid blue;
+    background-color: transparent;
 }

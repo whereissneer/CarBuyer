@@ -3,9 +3,12 @@ package Carbuyer.demo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import Carbuyer.demo.entity.Car;
 import Carbuyer.demo.service.CarService;
+import sms.demo.entity.Student;
 
 @Controller
 public class CarController {
@@ -28,4 +31,11 @@ public class CarController {
 			model.addAttribute("car", car);
 			return "createNewOfferForm";
 		}
+		
+		@PostMapping("/api/cars")
+		public String saveCar(@ModelAttribute("car") Car car) {
+			carService.saveCar(car);
+			return "redirect:/api/cars";
+		}
+	
 }

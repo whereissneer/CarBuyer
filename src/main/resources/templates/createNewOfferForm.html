@@ -15,14 +15,77 @@
         </div>
         <div class="container ml-6">
             <nav class="nav nav-pills flex-column flex-sm-row">
-                <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#">HOME</a>
+                <a class="flex-sm-fill text-sm-center nav-link"  th:href="@{/api/cars}" aria-current="page" href="#">HOME</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">BEST OFFERS</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">CONTACT US</a>
+                <a class="flex-sm-fill text-sm-center nav-link addNew active" th:href="@{/api/cars/new}">ADD NEW OFFER !</a>
               </nav>
         </div>
-        <div class="row">
-            <form th:action="@{/car}" th:object="${car}" method="POST">
+            <form th:action="@{/api/cars}" th:object="${car}" method="POST">
                          <!--TODO : ADDING NEW OFFER FORM-->
+                         <!--TODO : FIXING ALL INPUT TYPES AND IDs-->
+                <h2 class="text-center mt-5 mb-5">Fill out to add an offer</h2>
+                <div class="form-group row">
+                    <label for="carTitle" class="col-sm-2 col-form-label">Offer title</label>
+                    <div class="col-sm-10 ">
+                      <input type="text" class="form-control text-center" id="carTitle" th:field="*{carTitle}" placeholder="2005 Volskwagen Golf MK III 1.9 TDI" required>
+                    </div>
+                </div>       
+                <div class="form-group row">
+                    <label for="carPhotoUrl" class="col-sm-2 col-form-label">Car photo URL</label>
+                    <div class="col-sm-10 ">
+                      <input type="text" class="form-control text-center" id="carPhotoUrl" th:field="*{carPhotoUrl}" placeholder="PASTE YOUR URL HERE" required>
+                    </div>
+                </div>      
+                <div class="form-group row ml-1">
+                    <p style="padding-top:5px">Year Model</p> <div class="col-3 ">
+                      <input type="text" class="form-control text-center" id="yearModel" th:field="*{yearModel}" placeholder="2005" required>
+                    </div>
+                    <p style="padding-top:5px">Mileage</p><div class="col-3 ">
+                      <input type="text" class="form-control text-center" id="mileage" th:field="*{mileage}" placeholder="120 000 km" required>
+                      </div>
+                      <p style="padding-top:5px">Engine type</p><div class="col-3 ">
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" th:field="*{engineType}">
+                            <option value="Petrol" selected>Petrol</option>
+                            <option value="Diesel">Diesel</option>
+                            <option value="Electric">Electric</option>
+                          </select>
+                      </div>
+                </div>       
+                <div class="form-group row ml-1">
+                    <p style="padding-top:5px">Engine capacity</p> <div class="col-3 ">
+                      <input type="text" class="form-control text-center" id="engineCapacity" th:field="*{engineCapacity}" placeholder="1968cm" required>
+                    </div>
+                    <p style="padding-top:5px">Engine power</p><div class="col-3 ">
+                      <input type="text" class="form-control text-center" id="enginePower" th:field="*{enginePower}" placeholder="100 hs" required>
+                      </div>
+                      <p style="padding-top:5px">Gearbox type</p><div class="col-2 ">
+                        <select class="custom-select mr-sm-3" id="inlineFormCustomSelect" th:field="*{gearboxType}">
+                            <option value="Manual" selected>Manual</option>
+                            <option value="Automatic">Automatic</option>
+                          </select>
+                      </div>
+                </div>       
+                <div class="form-group row ml-1">
+                    <p style="padding-top:5px">Colour</p> <div class="col-3">
+                      <input type="text" class="form-control text-center" id="colour" th:field="*{colour}" placeholder="RED" required>
+                    </div>
+                      <p style="padding-top:5px">Drive type</p><div class="col-auto ">
+                        <select class="custom-select mr-sm-3" id="inlineFormCustomSelect" th:field="*{driveType}">
+                            <option value="1" selected>AWD</option>
+                            <option value="2">FWD</option>
+                            <option value="2">RWD</option>
+                          </select>
+                      </div>
+                </div>  
+                <div class="form-group row ml-1">
+                    <p style="padding-top:5px">Is damaged?</p><div class="col-1">
+                        <input type="checkbox" class="form-control text-center" id="isDamaged" th:field="*{isDamaged}">
+                        </div>   
+                </div>  
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                  </div>
             </form>
     </div>
 </body>
