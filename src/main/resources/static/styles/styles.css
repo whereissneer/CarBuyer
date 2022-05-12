@@ -11,3 +11,9 @@ h1 {
     border:0.5px solid blue;
     background-color: transparent;
 }
+.offer-card {
+    max-width:350px;
+}
+img {
+    width:100%;
+}

@@ -22,7 +22,6 @@ public class Car {
 	private String driveType;
 	private String colour;
 	private Boolean isDamaged;
-	
 	public Car() {
 		super();
 	}

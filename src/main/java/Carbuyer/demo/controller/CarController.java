@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import Carbuyer.demo.entity.Car;
 import Carbuyer.demo.service.CarService;
-import sms.demo.entity.Student;
 
 @Controller
 public class CarController {
@@ -22,7 +21,7 @@ public class CarController {
 		
 		@GetMapping("/api/cars")
 		public String getCars(Model model) {
-			model.addAttribute("car", carService.getAllCars());
+			model.addAttribute("cars", carService.getAllCars());
 			return "cars";
 		}
 		@GetMapping("/api/cars/new")
