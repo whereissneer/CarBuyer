@@ -21,13 +21,13 @@
                 <a class="flex-sm-fill text-sm-center nav-link addNew" th:href="@{/api/cars/new}">ADD NEW OFFER !</a>
               </nav>
         </div>
-        <div class="container mt-5 row">
-              <div class="card mr-2 col-sm" th:each = "car : ${cars}" >
+        <div class="container mt-2 row justify-content-around ">
+              <div class="card mr-2 col-3 mt-3 card-border" th:each = "car : ${cars}" >
                 <div class="card-body">
                 <img th:src="${car.carPhotoUrl}" alt="#">
                   <h5 class="card-title mt-2" th:text="${car.carTitle}"></h5>
-                  <p class="card-text" th:text="${car.price}"></p>
-                  <a href="#" class="btn btn-primary">BUY NOW !</a>
+                  <p class="card-text" th:text="${car.price}+' PLN'"></p>
+                  <a th:href="@{/api/cars/view/{id}(id=${car.id})}" class="btn btn-primary">BUY NOW !</a>
                 </div>
              </div> 
         </div>

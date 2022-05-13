@@ -11,9 +11,20 @@ h1 {
     border:0.5px solid blue;
     background-color: transparent;
 }
-.offer-card {
-    max-width:350px;
-}
 img {
     width:100%;
+}
+.card-border {
+    border : 1px solid blue;
+}
+.img400x400 {
+    max-width: 400px;
+}
+.spec-list p {
+    font-size: 24px;
+    color:blue;
+}
+.spec-list span {
+    color : black;
+    font-size:20px;
 }

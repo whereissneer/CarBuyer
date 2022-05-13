@@ -11,4 +11,6 @@ public interface CarService {
 	List<Car> getAllCars();
 	
 	Car saveCar(Car car);
+	
+	Car getCarById(Long id);
 }
