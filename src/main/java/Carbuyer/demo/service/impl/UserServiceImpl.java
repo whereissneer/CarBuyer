@@ -1,21 +1,23 @@
 package Carbuyer.demo.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import Carbuyer.demo.entity.User;
 import Carbuyer.demo.repository.UserRepository;
+import Carbuyer.demo.service.UserDetailsService;
 import Carbuyer.demo.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+	
+	@Autowired
 	private UserRepository userRepository;
-
-	public UserServiceImpl(UserRepository userRepository) {
-		super();
-		this.userRepository = userRepository;
-	}
 
 	@Override
 	public List<User> getAllUsers() {
@@ -31,6 +33,16 @@ public class UserServiceImpl implements UserService{
 	public User getUserById(Long id) {
 		return userRepository.getById(id);
 	}
+	
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Optional<User> user = userRepository.findByUsername(username);
+		user.orElseThrow(()->new UsernameNotFoundException("Not found: "+username));
+		return user.map(UserDetailsService::new).get();
+	}
+
+	
 
 	
 }
