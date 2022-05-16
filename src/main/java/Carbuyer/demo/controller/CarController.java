@@ -16,11 +16,9 @@ import Carbuyer.demo.service.UserService;
 public class CarController {
 
 		private CarService carService;
-		private UserService userService;
-		public CarController(CarService carService, UserService userService) {
+		public CarController(CarService carService) {
 			super();
 			this.carService = carService;
-			this.userService = userService;
 		};
 		
 		@GetMapping("/api/cars")
@@ -47,11 +45,5 @@ public class CarController {
 			model.addAttribute("car", carService.getCarById(id));
 			return "viewOffer";
 		}
-		@GetMapping("/api/cars/login")
-		public String loginForm(Model model) {
-			User user = new User();
-			model.addAttribute("user", user);
-			return "createNewUserForm";
-		}
-	
+		
 }
