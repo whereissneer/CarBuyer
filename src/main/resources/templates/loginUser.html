@@ -10,8 +10,9 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <h1 class="text-center mb-5 mt-5">Buy a Car ! </h1>
+        <div class="row container justify-content-around">
+            <div class="col-4"><h1 class="text-center mb-5 mt-5">Buy a Car ! </h1></div>
+            <div class="col-4 hello" sec:authorize="isAuthenticated">Hello <span sec:authentication="name" style="text-decoration:underline"></span></div>
         </div>
         <div class="container ml-6">
             <nav class="nav nav-pills flex-column flex-sm-row">
