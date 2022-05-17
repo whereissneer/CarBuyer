@@ -16,22 +16,27 @@
         </div>
         <div class="container ml-6">
             <nav class="nav nav-pills flex-column flex-sm-row">
-                <a class="flex-sm-fill text-sm-center nav-link" aria-current="page" href="#">HOME</a>
+                <a class="flex-sm-fill text-sm-center nav-link" aria-current="page" th:href="@{/api/cars}">HOME</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">BEST OFFERS</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">CONTACT US</a>
                 <a class="flex-sm-fill text-sm-center nav-link addNew" th:href="@{/api/cars/new}">ADD NEW OFFER !</a>
                 <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/api/cars/login}">LOGIN</a>
               </nav>
         </div>
-        <div class="container mt-2 row justify-content-around ">
-              <div class="card mr-2 col-3 mt-3 card-border" th:each = "car : ${cars}" >
-                <div class="card-body">
-                <img th:src="${car.carPhotoUrl}" alt="#">
-                  <h5 class="card-title mt-2" th:text="${car.carTitle}"></h5>
-                  <p class="card-text" th:text="${car.price}+' PLN'"></p>
-                  <a th:href="@{/api/cars/view/{id}(id=${car.id})}" class="btn btn-primary">BUY NOW !</a>
+        <div class="container row justify-content-center mt-5">
+            <form th:action="@{/api/cars/addNewUser}" th:object="${user}" method="POST">
+                <div class="form-group row container">
+                    <div class="col-5">Username</div>
+                    <div class="col-5">  <input type="text" class="text-center" id="username" th:field="*{username}" placeholder="USERNAME"></div>
                 </div>
-             </div> 
+                <div class="form-group row container">
+                    <div class="col-5">Password</div>
+                    <div class="col-5">  <input type="password" class="text-center" id="password" th:field="*{password}" placeholder="USERNAME"></div>
+                </div>
+                <div class="form-group row container justify-content-center mt-2">
+                    <div><input type="submit" name="userSubmit" id="userSubmit" class="btn btn-primary" value="CREATE"></div>
+                </div>
+            </form>
         </div>
 
     </div>
