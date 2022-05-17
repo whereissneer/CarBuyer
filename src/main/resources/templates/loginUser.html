@@ -43,6 +43,9 @@
                         <input type="submit" class="form-control text-center btn btn-primary" id="submitUser" value="LOGIN" required>
                       </div>
                 </div>
+                <div th:if="${param.error}" class="alert alert-danger col-sm-11">    
+                    Invalid username and password.
+                </div>
             </form>
         </div>
 
