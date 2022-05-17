@@ -16,11 +16,12 @@
         </div>
         <div class="container ml-6">
             <nav class="nav nav-pills flex-column flex-sm-row">
-                <a class="flex-sm-fill text-sm-center nav-link" aria-current="page" href="#">HOME</a>
+                <a class="flex-sm-fill text-sm-center nav-link" aria-current="page" th:href="@{/api/cars}">HOME</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">BEST OFFERS</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">CONTACT US</a>
                 <a class="flex-sm-fill text-sm-center nav-link addNew" th:href="@{/api/cars/new}">ADD NEW OFFER !</a>
-                <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/api/cars/login}">LOGIN</a>
+                <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/login}">LOGIN</a>
+                <a class="flex-sm-fill text-sm-center nav-link" th:href="@{/api/cars/createNewUser}">REGISTER</a>
               </nav>
         </div>
         <div class="container mt-2 row justify-content-around ">

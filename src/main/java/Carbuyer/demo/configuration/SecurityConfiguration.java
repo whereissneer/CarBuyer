@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -37,9 +38,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.antMatchers(HttpMethod.POST,"/api/cars").hasRole("USER")
 			.anyRequest().hasRole("USER")
 			.and()
-			.formLogin().permitAll()
+			.formLogin().loginPage("/login").defaultSuccessUrl("/api/cars").permitAll()
 			.and()
-			.logout().permitAll();
+			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.logoutSuccessUrl("/login").deleteCookies("JSESSIONID")
+			.invalidateHttpSession(true);
 	}
 	
 	@Bean

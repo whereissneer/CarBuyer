@@ -20,21 +20,30 @@
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">BEST OFFERS</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">CONTACT US</a>
                 <a class="flex-sm-fill text-sm-center nav-link addNew" th:href="@{/api/cars/new}">ADD NEW OFFER !</a>
-                <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/api/cars/login}">LOGIN</a>
+                <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/login}">LOGIN</a>
+                <a class="flex-sm-fill text-sm-center nav-link" th:href="@{/api/cars/createNewUser}">REGISTER</a>
               </nav>
         </div>
-        <div class="container row justify-content-center mt-5">
+        
+        <div class="row justify-content-center mt-5">
             <form th:action="@{/api/cars/addNewUser}" th:object="${user}" method="POST">
-                <div class="form-group row container">
-                    <div class="col-5">Username</div>
-                    <div class="col-5">  <input type="text" class="text-center" id="username" th:field="*{username}" placeholder="USERNAME"></div>
+                <h3 class="text-center">Create new user</h3>
+                <div class="form-group row mt-5">
+                    <div class="col-sm-3 col-form-labe mt-2">Username</div>
+                    <div class="col-sm-8 ">
+                        <input type="text" class="form-control text-center" id="username" name="username" th:field="*{username}" placeholder="USERNAME" required>
+                      </div>
                 </div>
-                <div class="form-group row container">
-                    <div class="col-5">Password</div>
-                    <div class="col-5">  <input type="password" class="text-center" id="password" th:field="*{password}" placeholder="USERNAME"></div>
+                <div class="form-group row ">
+                    <div class="col-sm-3 col-form-labe mt-2">Password</div>
+                    <div class="col-sm-8 ">
+                        <input type="password" class="form-control text-center" id="password" name="password" th:field="*{password}" placeholder="PASSWORD" required>
+                      </div>
                 </div>
-                <div class="form-group row container justify-content-center mt-2">
-                    <div><input type="submit" name="userSubmit" id="userSubmit" class="btn btn-primary" value="CREATE"></div>
+                <div class="form-group row">
+                    <div class="col-sm-11 ">
+                        <input type="submit" class="form-control text-center btn btn-primary" id="submitUser" value="CREATE" required>
+                      </div>
                 </div>
             </form>
         </div>

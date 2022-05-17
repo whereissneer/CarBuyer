@@ -19,21 +19,23 @@
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">BEST OFFERS</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">CONTACT US</a>
                 <a class="flex-sm-fill text-sm-center nav-link addNew" th:href="@{/api/cars/new}">ADD NEW OFFER !</a>
-                <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/api/cars/login}">LOGIN</a>
+                <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/login}">LOGIN</a>
+                <a class="flex-sm-fill text-sm-center nav-link" th:href="@{/api/cars/createNewUser}">REGISTER</a>
               </nav>
         </div>
         <div class="row justify-content-center mt-5">
-            <form th:action="@{/api/cars/}" th:object="${user}" method="POST">
-                <div class="form-group row ">
+            <form th:action="@{/login}" th:object="${user}" method="POST">
+                <h3 class="text-center">Login </h3>
+                <div class="form-group row mt-5">
                     <div class="col-sm-3 col-form-labe mt-2">Username</div>
                     <div class="col-sm-8 ">
-                        <input type="text" class="form-control text-center" id="username" th:field="*{username}" placeholder="USERNAME" required>
+                        <input type="text" class="form-control text-center" id="username" name="username" th:field="*{username}" placeholder="USERNAME" required>
                       </div>
                 </div>
                 <div class="form-group row ">
                     <div class="col-sm-3 col-form-labe mt-2">Password</div>
                     <div class="col-sm-8 ">
-                        <input type="text" class="form-control text-center" id="password" th:field="*{password}" placeholder="PASSWORD" required>
+                        <input type="password" class="form-control text-center" id="password" name="password" th:field="*{password}" placeholder="PASSWORD" required>
                       </div>
                 </div>
                 <div class="form-group row">

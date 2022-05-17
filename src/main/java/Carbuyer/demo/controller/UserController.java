@@ -16,7 +16,7 @@ public class UserController {
 	private UserService userService;
 	
 
-	@GetMapping("/api/cars/login")
+	@GetMapping("/login")
 	public String loginForm(Model model) {
 		User user = new User();
 		model.addAttribute("user", user);
