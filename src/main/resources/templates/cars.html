@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,8 @@
 </head>
 <body>
     <div class="container">
-      
+        <div sec:authorize="isAuthenticated()">
+            Authenticated as <span sec:authentication="name"></span></div>
         <div class="row">
             <h1 class="text-center mb-5 mt-5">Buy a Car ! </h1>
         </div>
@@ -20,8 +21,9 @@
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">BEST OFFERS</a>
                 <a class="flex-sm-fill text-sm-center nav-link" href="#">CONTACT US</a>
                 <a class="flex-sm-fill text-sm-center nav-link addNew" th:href="@{/api/cars/new}">ADD NEW OFFER !</a>
-                <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/login}">LOGIN</a>
-                <a class="flex-sm-fill text-sm-center nav-link" th:href="@{/api/cars/createNewUser}">REGISTER</a>
+                <a class="flex-sm-fill text-sm-center nav-link" th:href="@{/api/cars/createNewUser}" sec:authorize="isAnonymous()">REGISTER</a>
+                <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/login}" sec:authorize="isAnonymous()">LOGIN</a>
+                <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" sec:authorize="isAuthenticated()" th:href="@{/logout}">LOGOUT</a>
               </nav>
         </div>
         <div class="container mt-2 row justify-content-around ">
@@ -34,6 +36,7 @@
                 </div>
              </div> 
         </div>
+        
 
     </div>
 </body>

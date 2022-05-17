@@ -19,8 +19,9 @@
             <a class="flex-sm-fill text-sm-center nav-link" href="#">BEST OFFERS</a>
             <a class="flex-sm-fill text-sm-center nav-link" href="#">CONTACT US</a>
             <a class="flex-sm-fill text-sm-center nav-link addNew" th:href="@{/api/cars/new}">ADD NEW OFFER !</a>
-            <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/login}">LOGIN</a>
-            <a class="flex-sm-fill text-sm-center nav-link" th:href="@{/api/cars/createNewUser}">REGISTER</a>
+            <a class="flex-sm-fill text-sm-center nav-link" th:href="@{/api/cars/createNewUser}" sec:authorize="isAnonymous()">REGISTER</a>
+            <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/login}" sec:authorize="isAnonymous()">LOGIN</a>
+            <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" sec:authorize="isAuthenticated()" th:href="@{/logout}">LOGOUT</a>
           </nav>
         </div>
             <form th:action="@{/api/cars}" th:object="${car}" method="POST">
