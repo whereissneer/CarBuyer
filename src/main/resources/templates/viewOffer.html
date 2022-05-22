@@ -68,6 +68,10 @@
             <a class="col-4 align-self-center btn btn-danger" th:href="@{/api/cars/delete/{id}(id=${car.id})}" style="color:white; font-size:24px">
                DELETE
             </a>
+            <div class="w-100 mb-2"></div>
+            <a class="col-4 align-self-center btn btn-primary" th:href="@{/api/cars/edit/{id}(id=${car.id})}" style="color:white; font-size:24px">
+               EDIT
+            </a>
          </div>
          <div class="row justify-content-center container mt-2" th:unless="${canDelete}">
             <a class="col-4 align-self-center btn btn-danger" style="color:white; font-size:24px">

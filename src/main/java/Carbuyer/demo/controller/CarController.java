@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -86,5 +87,41 @@ public class CarController {
 			}
 			return "redirect:/api/cars";
 		}
+		//PUT MAPPING
+		@RequestMapping(value="/api/cars/edit/{id}" ,method= {RequestMethod.GET})
+		public String editOffer(@PathVariable Long id, Principal principal, @ModelAttribute("car") Car car) {
+			//get current user
+			User user = userService.getUserByName(principal.getName());
+			//get car
+			Car thisCar = carService.getCarById(id);
+			//get owner
+			User owner = userService.getUserById(thisCar.getOwner().getId());
+			if(user.equals(owner)) {
+				return "editForm";
+			}
+			else {
+				return"redirect:/api/cars";
+			}
+		}
+		@PostMapping("/api/cars/editCar/{id}")
+		public String editCar(@PathVariable Long id, @ModelAttribute("car") Car car, Model model) {
+			Car existingCar = carService.getCarById(id);
+			existingCar.setId(id);
+			existingCar.setCarTitle(car.getCarTitle());
+			existingCar.setCarPhotoUrl(car.getCarPhotoUrl());
+			existingCar.setYearModel(car.getYearModel());
+			existingCar.setMileage(car.getMileage());
+			existingCar.setEngineType(car.getEngineType());
+			existingCar.setEngineCapacity(car.getEngineCapacity());
+			existingCar.setEnginePower(car.getEnginePower());
+			existingCar.setGearboxType(car.getGearboxType());
+			existingCar.setColour(car.getColour());
+			existingCar.setDriveType(car.getDriveType());
+			existingCar.setIsDamaged(car.getIsDamaged());
+			existingCar.setPrice(car.getPrice());
+			carService.saveCar(existingCar);
+			return "redirect:/api/cars";
+		}
+		
 		
 }

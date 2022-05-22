@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link th:href="@{/styles/styles.css}" rel="stylesheet" />
+    <title>Buy a Car !</title>
+</head>
+<body>
+    <div class="container">
+      <div class="row container justify-content-around">
+        <div class="col-4"><h1 class="text-center mb-5 mt-5">Sell a Car ! </h1></div>
+        <div class="col-4 hello" sec:authorize="isAuthenticated">Hello <span sec:authentication="name" style="text-decoration:underline"></span></div>
+    </div>
+        <div class="container ml-6">
+          <nav class="nav nav-pills flex-column flex-sm-row">
+            <a class="flex-sm-fill text-sm-center nav-link" aria-current="page" th:href="@{/api/cars}">HOME</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="#">BEST OFFERS</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="#">CONTACT US</a>
+            <a class="flex-sm-fill text-sm-center nav-link addNew" th:href="@{/api/cars/new}">ADD NEW OFFER !</a>
+            <a class="flex-sm-fill text-sm-center nav-link" th:href="@{/api/cars/createNewUser}" sec:authorize="isAnonymous()">REGISTER</a>
+            <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/login}" sec:authorize="isAnonymous()">LOGIN</a>
+            <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" sec:authorize="isAuthenticated()" th:href="@{/logout}">LOGOUT</a>
+          </nav>
+        </div>
+            <form th:action="@{/api/cars/editCar/{id}(id=${car.id})}" th:object="${car}" method="POST">
+                         <!--TODO : ADDING NEW OFFER FORM-->
+                         <!--TODO : FIXING ALL INPUT TYPES AND IDs-->
+                <h2 class="text-center mt-5 mb-5">Fill out to add an offer</h2>
+                <div class="form-group row">
+                    <label for="carTitle" class="col-sm-2 col-form-label">Offer title</label>
+                    <div class="col-sm-10 ">
+                      <input type="text" class="form-control text-center" id="carTitle" th:placeholder="${car.carTitle}" th:field="*{carTitle}" required>
+                    </div>
+                </div>       
+                <div class="form-group row">
+                    <label for="carPhotoUrl" class="col-sm-2 col-form-label">Car photo URL</label>
+                    <div class="col-sm-10 ">
+                      <input type="text" class="form-control text-center" id="carPhotoUrl" th:field="*{carPhotoUrl}" placeholder="PASTE YOUR URL HERE" required>
+                    </div>
+                </div>      
+                <div class="form-group row ml-1">
+                    <p style="padding-top:5px">Year Model</p> <div class="col-3 ">
+                      <input type="text" class="form-control text-center" id="yearModel" th:field="*{yearModel}" placeholder="2005" required>
+                    </div>
+                    <p style="padding-top:5px">Mileage</p><div class="col-3 ">
+                      <input type="text" class="form-control text-center" id="mileage" th:field="*{mileage}" placeholder="120 000 km" required>
+                      </div>
+                      <p style="padding-top:5px">Engine type</p><div class="col-3 ">
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" th:field="*{engineType}">
+                            <option value="Petrol" selected>Petrol</option>
+                            <option value="Diesel">Diesel</option>
+                            <option value="Electric">Electric</option>
+                          </select>
+                      </div>
+                </div>       
+                <div class="form-group row ml-1">
+                    <p style="padding-top:5px">Engine capacity</p> <div class="col-3 ">
+                      <input type="text" class="form-control text-center" id="engineCapacity" th:field="*{engineCapacity}" placeholder="1968cm" required>
+                    </div>
+                    <p style="padding-top:5px">Engine power</p><div class="col-3 ">
+                      <input type="text" class="form-control text-center" id="enginePower" th:field="*{enginePower}" placeholder="100 hs" required>
+                      </div>
+                      <p style="padding-top:5px">Gearbox type</p><div class="col-2 ">
+                        <select class="custom-select mr-sm-3" id="inlineFormCustomSelect" th:field="*{gearboxType}">
+                            <option value="Manual" selected>Manual</option>
+                            <option value="Automatic">Automatic</option>
+                          </select>
+                      </div>
+                </div>       
+                <div class="form-group row ml-1">
+                    <p style="padding-top:5px">Colour</p> <div class="col-3">
+                      <input type="text" class="form-control text-center" id="colour" th:field="*{colour}" placeholder="RED" required>
+                    </div>
+                      <p style="padding-top:5px">Drive type</p><div class="col-auto ">
+                        <select class="custom-select mr-sm-3" id="inlineFormCustomSelect" th:field="*{driveType}">
+                            <option value="1" selected>AWD</option>
+                            <option value="2">FWD</option>
+                            <option value="2">RWD</option>
+                          </select>
+                      </div>
+                </div>  
+                <div class="form-group row ml-1">
+                    <p style="padding-top:5px">Is damaged?</p><div class="col-1">
+                        <input type="checkbox" class="form-control text-center" id="isDamaged" th:field="*{isDamaged}">
+                        </div>   
+                </div>  
+                <div class="form-group row ml-1">
+                    <p style="padding-top:5px">Price</p> <div class="col-3 ">
+                      <input type="text" class="form-control text-center" id="price" th:field="*{price}" placeholder="200 000 PLN" required>
+                    </div>
+                </div>       
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                  </div>
+            </form>
+    </div>
+</body>
+</html>
