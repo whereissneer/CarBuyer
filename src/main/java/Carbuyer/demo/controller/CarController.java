@@ -57,8 +57,19 @@ public class CarController {
 		}
 		
 		@GetMapping("/api/cars/view/{id}")
-		public String viewOffer(@PathVariable Long id, Model model) {
+		public String viewOffer(@PathVariable Long id, Model model, Principal principal) {
+			boolean canDelete = false;
+			//get current user
+			User user = userService.getUserByName(principal.getName());
+			//get car
+			Car thisCar = carService.getCarById(id);
+			//get owner
+			User owner = userService.getUserById(thisCar.getOwner().getId());
+			if(user.equals(owner)) {
+				canDelete=true;
+			}
 			model.addAttribute("car", carService.getCarById(id));
+			model.addAttribute("canDelete", canDelete);
 			return "viewOffer";
 		}
 		
@@ -68,13 +79,10 @@ public class CarController {
 			User user = userService.getUserByName(principal.getName());
 			//get car
 			Car thisCar = carService.getCarById(id);
-			//get owner id
+			//get owner
 			User owner = userService.getUserById(thisCar.getOwner().getId());
 			if(user.equals(owner)) {
 				carService.deleteById(id);
-			}
-			else {
-				System.out.println("nie mozna");
 			}
 			return "redirect:/api/cars";
 		}
