@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import Carbuyer.demo.entity.Car;
 import Carbuyer.demo.entity.User;
+import Carbuyer.demo.repository.CarRepository;
 import Carbuyer.demo.repository.UserRepository;
 import Carbuyer.demo.service.CarService;
 import Carbuyer.demo.service.UserDetailsService;
@@ -62,8 +63,19 @@ public class CarController {
 		}
 		
 		@RequestMapping(value="/api/cars/delete/{id}" ,method= {RequestMethod.GET, RequestMethod.DELETE})
-		public String deleteOffer(@PathVariable Long id) {
-			carService.deleteById(id);
+		public String deleteOffer(@PathVariable Long id, Principal principal) {
+			//get current user
+			User user = userService.getUserByName(principal.getName());
+			//get car
+			Car thisCar = carService.getCarById(id);
+			//get owner id
+			User owner = userService.getUserById(thisCar.getOwner().getId());
+			if(user.equals(owner)) {
+				carService.deleteById(id);
+			}
+			else {
+				System.out.println("nie mozna");
+			}
 			return "redirect:/api/cars";
 		}
 		
