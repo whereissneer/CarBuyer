@@ -16,6 +16,7 @@ public class UserDetailsService implements UserDetails{
 	private String username;
 	private String password;
 	private List<GrantedAuthority> authorities;
+	private User user;
 	
 	public UserDetailsService() {
 		super();
@@ -26,7 +27,8 @@ public class UserDetailsService implements UserDetails{
 		this.password=user.getPassword();
 		this.authorities = Arrays.stream(user.getRoles().split(","))
 							.map(SimpleGrantedAuthority::new)
-							.collect(Collectors.toList()); 
+							.collect(Collectors.toList());
+		this.user=user;
 	}
 
 	@Override
@@ -62,6 +64,14 @@ public class UserDetailsService implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 

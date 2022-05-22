@@ -1,9 +1,14 @@
 package Carbuyer.demo.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 
@@ -15,6 +20,9 @@ public class User {
 	private String username;
 	private String password;
 	private String roles = "ROLE_USER";
+	
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+	private Set<Car> cars = new HashSet<>();
 	
 	public User() {
 		super();
@@ -57,6 +65,14 @@ public class User {
 
 	public void setRoles(String roles) {
 		this.roles = roles;
+	}
+
+	public Set<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(Set<Car> cars) {
+		this.cars = cars;
 	}
 	
 

@@ -1,9 +1,12 @@
 package Carbuyer.demo.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Car {
@@ -22,6 +25,11 @@ public class Car {
 	private String driveType;
 	private String colour;
 	private Boolean isDamaged;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="user_id", referencedColumnName = "id")
+	private User owner;
+	
 	public Car() {
 		super();
 	}
@@ -148,6 +156,13 @@ public class Car {
 		this.isDamaged = isDamaged;
 	}
 
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User user) {
+		this.owner = user;
+	}
 	
 	
 	

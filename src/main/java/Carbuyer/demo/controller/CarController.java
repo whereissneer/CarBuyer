@@ -1,5 +1,11 @@
 package Carbuyer.demo.controller;
 
+import java.security.Principal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,17 +15,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import Carbuyer.demo.entity.Car;
 import Carbuyer.demo.entity.User;
+import Carbuyer.demo.repository.UserRepository;
 import Carbuyer.demo.service.CarService;
+import Carbuyer.demo.service.UserDetailsService;
 import Carbuyer.demo.service.UserService;
 
 @Controller
 public class CarController {
 
+		@Autowired
 		private CarService carService;
-		public CarController(CarService carService) {
-			super();
-			this.carService = carService;
-		};
+		
+		@Autowired
+		private UserService userService;	
+		
 		
 		@GetMapping("/api/cars")
 		public String getCars(Model model) {
@@ -34,8 +43,10 @@ public class CarController {
 			return "createNewOfferForm";
 		}
 		
-		@PostMapping("/api/cars")
-		public String saveCar(@ModelAttribute("car") Car car) {
+		@PostMapping("/api/cars/addCar")
+		public String saveCar(@ModelAttribute("car") Car car, Principal principal) {
+			User user = userService.getUserByName(principal.getName());
+			car.setOwner(user);
 			carService.saveCar(car);
 			return "redirect:/api/cars";
 		}
