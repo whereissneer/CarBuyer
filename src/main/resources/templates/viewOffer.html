@@ -27,6 +27,11 @@
         </div>
         <div class="container row mt-5">
            <div class="row ">
+            <div class="row justify-content-center container mt-2"sec:authorize="isAuthenticated()">
+               <a class="col-4 align-self-center btn btn-danger" th:href="@{/api/cars/delete/{id}(id=${car.id})}" style="color:white; font-size:24px">
+                  DELETE
+               </a>
+           </div>
             <div class="col-5">
                 <img th:src="${car.carPhotoUrl}" alt="#">
             </div>
@@ -69,6 +74,7 @@
                   Buy now ! 
                </a>
            </div>
+           
 
         </div>
     </div>

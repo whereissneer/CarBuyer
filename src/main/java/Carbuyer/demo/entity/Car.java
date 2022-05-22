@@ -26,8 +26,8 @@ public class Car {
 	private String colour;
 	private Boolean isDamaged;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="user_id", referencedColumnName = "id")
+	@ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name="owner_id", referencedColumnName = "id")
 	private User owner;
 	
 	public Car() {
