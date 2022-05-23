@@ -24,6 +24,7 @@
             <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/login}" sec:authorize="isAnonymous()">LOGIN</a>
             <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" sec:authorize="isAuthenticated()" th:href="@{/logout}">LOGOUT</a>
           </nav>
+          <hr>
         </div>
             <form th:action="@{/api/cars/editCar/{id}(id=${car.id})}" th:object="${car}" method="POST">
                          <!--TODO : ADDING NEW OFFER FORM-->

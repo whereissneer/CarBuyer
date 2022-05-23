@@ -12,7 +12,11 @@
     <div class="container">
         <div class="row container justify-content-around">
             <div class="col-4"><h1 class="text-center mb-5 mt-5">Buy a Car ! </h1></div>
-            <div class="col-4 hello" sec:authorize="isAuthenticated">Hello <span sec:authentication="name" style="text-decoration:underline"></span></div>
+            <div class="col-4 hello" sec:authorize="isAuthenticated">Hello 
+                <span  style="text-decoration:underline">
+                    <a th:href="@{/api/cars/user/{id}(id=${user.id})}" sec:authentication="name"></a>
+                </span>
+            </div>
         </div>
         <div class="container ml-6">
             <nav class="nav nav-pills flex-column flex-sm-row">
@@ -24,6 +28,7 @@
                 <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" th:href="@{/login}" sec:authorize="isAnonymous()">LOGIN</a>
                 <a class="flex-sm-fill text-sm-center nav-link btn btn-primary" sec:authorize="isAuthenticated()" th:href="@{/logout}">LOGOUT</a>
               </nav>
+              <hr>
         </div>
         <div class="container mt-2 row justify-content-around ">
               <div class="card mr-2 col-3 mt-3 card-border" th:each = "car : ${cars}" >

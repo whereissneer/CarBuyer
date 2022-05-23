@@ -37,8 +37,11 @@ public class CarController {
 		
 		
 		@GetMapping("/api/cars")
-		public String getCars(Model model) {
+		public String getCars(Model model, Principal principal) {
 			model.addAttribute("cars", carService.getAllCars());
+			if(principal!=null) {
+				model.addAttribute("user", userService.getUserByName(principal.getName()));
+			}
 			return "cars";
 		}
 		
@@ -61,13 +64,15 @@ public class CarController {
 		public String viewOffer(@PathVariable Long id, Model model, Principal principal) {
 			boolean canDelete = false;
 			//get current user
-			User user = userService.getUserByName(principal.getName());
+			if(principal!=null) {
+				User user = userService.getUserByName(principal.getName());
 			//get car
-			Car thisCar = carService.getCarById(id);
-			//get owner
-			User owner = userService.getUserById(thisCar.getOwner().getId());
-			if(user.equals(owner)) {
-				canDelete=true;
+				Car thisCar = carService.getCarById(id);
+				//get owner
+				User owner = userService.getUserById(thisCar.getOwner().getId());
+				if(user.equals(owner)) {
+					canDelete=true;
+				}
 			}
 			model.addAttribute("car", carService.getCarById(id));
 			model.addAttribute("canDelete", canDelete);
