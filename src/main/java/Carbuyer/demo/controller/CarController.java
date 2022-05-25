@@ -2,6 +2,7 @@ package Carbuyer.demo.controller;
 
 import java.lang.reflect.Method;
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -39,6 +40,26 @@ public class CarController {
 		@GetMapping("/api/cars")
 		public String getCars(Model model, Principal principal) {
 			model.addAttribute("cars", carService.getAllCars());
+			if(principal!=null) {
+				model.addAttribute("user", userService.getUserByName(principal.getName()));
+			}
+			return "cars";
+		}
+		
+		@GetMapping("/api/cars/search")
+		public String getCarsByKeyword(Car car, Model model, String keyword, Principal principal) {
+			boolean nothingWasFound = false;
+			if(keyword!=null) {
+				List<Car> cars = carService.getCarByKeyword(keyword);
+				model.addAttribute("cars", cars);
+				if(cars.size()==0) {
+					nothingWasFound=true;
+					model.addAttribute("nothingWasFound", nothingWasFound);
+				}
+			}
+			else {
+				model.addAttribute("cars", carService.getAllCars());
+			}
 			if(principal!=null) {
 				model.addAttribute("user", userService.getUserByName(principal.getName()));
 			}

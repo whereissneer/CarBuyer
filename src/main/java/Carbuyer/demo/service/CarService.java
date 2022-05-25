@@ -15,4 +15,6 @@ public interface CarService {
 	Car getCarById(Long id);
 	
 	void deleteById(Long id);
+	
+	List<Car> getCarByKeyword(String keyword);
 }

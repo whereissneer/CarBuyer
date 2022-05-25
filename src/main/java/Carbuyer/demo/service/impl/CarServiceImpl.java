@@ -43,5 +43,9 @@ public class CarServiceImpl implements CarService{
 		carRepository.deleteById(id);
 		
 	}
-
+	
+	@Override
+	public List<Car> getCarByKeyword(String keyword){
+		return carRepository.findCarByKeyword(keyword);
+	}
 }
