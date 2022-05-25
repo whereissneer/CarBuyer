@@ -37,21 +37,30 @@ public class CarController {
 		private UserService userService;	
 		
 		
-		@GetMapping("/api/cars")
+		/*@GetMapping("/api/cars")
 		public String getCars(Model model, Principal principal) {
 			model.addAttribute("cars", carService.getAllCars());
 			if(principal!=null) {
 				model.addAttribute("user", userService.getUserByName(principal.getName()));
 			}
 			return "cars";
-		}
+		}*/
 		
-		@GetMapping("/api/cars/search")
+		//TODO
+		//ADD OWNER MAPPING TO DISPLAY IN CARD BODY
+		
+		@GetMapping({"/api/cars/search", "/api/cars"})
 		public String getCarsByKeyword(Car car, Model model, String keyword, Principal principal) {
 			boolean nothingWasFound = false;
+			//get car
+			Car thisCar = carService.getCarById(car.getId());
+			//get owner
+			User owner = userService.getUserById(thisCar.getOwner().getId());
+			model.addAttribute("owner", owner);
 			if(keyword!=null) {
 				List<Car> cars = carService.getCarByKeyword(keyword);
 				model.addAttribute("cars", cars);
+				
 				if(cars.size()==0) {
 					nothingWasFound=true;
 					model.addAttribute("nothingWasFound", nothingWasFound);
