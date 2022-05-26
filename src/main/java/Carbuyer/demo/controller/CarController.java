@@ -46,8 +46,6 @@ public class CarController {
 			return "cars";
 		}*/
 		
-		//TODO
-		//ADD OWNER MAPPING TO DISPLAY IN CARD BODY
 		
 		@GetMapping({"/api/cars/search", "/api/cars"})
 		public String getCarsByKeyword(Car car, Model model, String keyword, Principal principal) {
@@ -124,13 +122,14 @@ public class CarController {
 		}
 		//PUT MAPPING
 		@RequestMapping(value="/api/cars/edit/{id}" ,method= {RequestMethod.GET})
-		public String editOffer(@PathVariable Long id, Principal principal, @ModelAttribute("car") Car car) {
+		public String editOffer(@PathVariable Long id, Principal principal, @ModelAttribute("car") Car car, Model model) {
 			//get current user
 			User user = userService.getUserByName(principal.getName());
 			//get car
 			Car thisCar = carService.getCarById(id);
 			//get owner
 			User owner = userService.getUserById(thisCar.getOwner().getId());
+			model.addAttribute("thisCar", carService.getCarById(id));
 			if(user.equals(owner)) {
 				return "editForm";
 			}

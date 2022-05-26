@@ -27,27 +27,25 @@
           <hr>
         </div>
             <form th:action="@{/api/cars/editCar/{id}(id=${car.id})}" th:object="${car}" method="POST">
-                         <!--TODO : ADDING NEW OFFER FORM-->
-                         <!--TODO : FIXING ALL INPUT TYPES AND IDs-->
                 <h2 class="text-center mt-5 mb-5">Fill out to add an offer</h2>
                 <div class="form-group row">
                     <label for="carTitle" class="col-sm-2 col-form-label">Offer title</label>
                     <div class="col-sm-10 ">
-                      <input type="text" class="form-control text-center" id="carTitle" th:placeholder="${car.carTitle}" th:field="*{carTitle}" required>
+                      <input type="text" class="form-control text-center" id="carTitle"  th:field="*{carTitle}" th:placeholder="${thisCar.carTitle}" required>
                     </div>
                 </div>       
                 <div class="form-group row">
                     <label for="carPhotoUrl" class="col-sm-2 col-form-label">Car photo URL</label>
                     <div class="col-sm-10 ">
-                      <input type="text" class="form-control text-center" id="carPhotoUrl" th:field="*{carPhotoUrl}" placeholder="PASTE YOUR URL HERE" required>
+                      <input type="text" class="form-control text-center" id="carPhotoUrl" th:field="*{carPhotoUrl}" th:placeholder="${thisCar.carPhotoUrl}" required>
                     </div>
                 </div>      
                 <div class="form-group row ml-1">
                     <p style="padding-top:5px">Year Model</p> <div class="col-3 ">
-                      <input type="text" class="form-control text-center" id="yearModel" th:field="*{yearModel}" placeholder="2005" required>
+                      <input type="text" class="form-control text-center" id="yearModel" th:field="*{yearModel}" th:placeholder="${thisCar.yearModel}" required>
                     </div>
                     <p style="padding-top:5px">Mileage</p><div class="col-3 ">
-                      <input type="text" class="form-control text-center" id="mileage" th:field="*{mileage}" placeholder="120 000 km" required>
+                      <input type="text" class="form-control text-center" id="mileage" th:field="*{mileage}" th:placeholder="${thisCar.mileage}" required>
                       </div>
                       <p style="padding-top:5px">Engine type</p><div class="col-3 ">
                         <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" th:field="*{engineType}">
@@ -59,10 +57,10 @@
                 </div>       
                 <div class="form-group row ml-1">
                     <p style="padding-top:5px">Engine capacity</p> <div class="col-3 ">
-                      <input type="text" class="form-control text-center" id="engineCapacity" th:field="*{engineCapacity}" placeholder="1968cm" required>
+                      <input type="text" class="form-control text-center" id="engineCapacity" th:field="*{engineCapacity}" th:placeholder="${thisCar.engineCapacity}" required>
                     </div>
                     <p style="padding-top:5px">Engine power</p><div class="col-3 ">
-                      <input type="text" class="form-control text-center" id="enginePower" th:field="*{enginePower}" placeholder="100 hs" required>
+                      <input type="text" class="form-control text-center" id="enginePower" th:field="*{enginePower}" th:placeholder="${thisCar.enginePower}" required>
                       </div>
                       <p style="padding-top:5px">Gearbox type</p><div class="col-2 ">
                         <select class="custom-select mr-sm-3" id="inlineFormCustomSelect" th:field="*{gearboxType}">
@@ -73,7 +71,7 @@
                 </div>       
                 <div class="form-group row ml-1">
                     <p style="padding-top:5px">Colour</p> <div class="col-3">
-                      <input type="text" class="form-control text-center" id="colour" th:field="*{colour}" placeholder="RED" required>
+                      <input type="text" class="form-control text-center" id="colour" th:field="*{colour}" th:placeholder="${thisCar.colour}" required>
                     </div>
                       <p style="padding-top:5px">Drive type</p><div class="col-auto ">
                         <select class="custom-select mr-sm-3" id="inlineFormCustomSelect" th:field="*{driveType}">
@@ -90,13 +88,16 @@
                 </div>  
                 <div class="form-group row ml-1">
                     <p style="padding-top:5px">Price</p> <div class="col-3 ">
-                      <input type="text" class="form-control text-center" id="price" th:field="*{price}" placeholder="200 000 PLN" required>
+                      <input type="text" class="form-control text-center" id="price" th:field="*{price}" th:placeholder="${thisCar.price}" required>
                     </div>
                 </div>       
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary mb-2">Submit</button>
                   </div>
             </form>
+            <footer class="text-center mt-3 mb-3" style="font-size:12px; color:rgba(0,0,0,0.4)">
+              &copy; Robert Michalski 2022
+            </footer>
     </div>
 </body>
 </html>
