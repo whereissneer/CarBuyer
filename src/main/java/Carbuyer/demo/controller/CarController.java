@@ -53,10 +53,10 @@ public class CarController {
 		public String getCarsByKeyword(Car car, Model model, String keyword, Principal principal) {
 			boolean nothingWasFound = false;
 			//get car
-			Car thisCar = carService.getCarById(car.getId());
+			//Car thisCar = carService.getCarById(car.getId());
 			//get owner
-			User owner = userService.getUserById(thisCar.getOwner().getId());
-			model.addAttribute("owner", owner);
+			//User owner = userService.getUserById(thisCar.getOwner().getId());
+			//model.addAttribute("owner", owner);
 			if(keyword!=null) {
 				List<Car> cars = carService.getCarByKeyword(keyword);
 				model.addAttribute("cars", cars);

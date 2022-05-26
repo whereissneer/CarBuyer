@@ -4,8 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import Carbuyer.demo.entity.User;
@@ -16,8 +20,16 @@ import Carbuyer.demo.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 	
+	
 	@Autowired
 	private UserRepository userRepository;
+
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	public UserServiceImpl(@Lazy PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
 
 	@Override
 	public List<User> getAllUsers() {
@@ -26,7 +38,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User saveUser(User user) {
-		return userRepository.save(user);
+		User userToSave = new User();
+		userToSave.setId(user.getId());
+		userToSave.setUsername(user.getUsername());
+		userToSave.setPassword(passwordEncoder.encode(user.getPassword()));
+		userToSave.setRoles(user.getRoles());
+		userToSave.setCars(null);
+		return userRepository.save(userToSave);
 	}
 
 	@Override

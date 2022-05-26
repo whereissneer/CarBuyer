@@ -17,6 +17,8 @@ public interface UserService extends UserDetailsService{
 	User getUserById(Long id);
 
 	User getUserByName(String name);
+	
+	
 
 	
 }
